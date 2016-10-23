@@ -47,7 +47,7 @@ def main():
 
     driver = webdriver.Firefox()
 
-    username = 'huntanium_' #sys.argv[1]
+    username = '' #sys.argv[1]
     password = '' #sys.argv[2]
 
     try:
