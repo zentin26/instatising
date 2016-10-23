@@ -322,12 +322,12 @@ class InstagramComment():
         self.hashtags = hashtags
         self.attags = attags
 
-    def get_hashtags(self, driver):
+    def get_hashtags(self, driver, c):
         hashtags = re.findall(r'#(\w+)', c)
 
         return hashtags
 
-    def get_attags(self, driver):
+    def get_attags(self, driver, c):
         attags = re.findall(r'@(\w+)', c)
 
         return attags
