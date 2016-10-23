@@ -48,7 +48,7 @@ def main():
     driver = webdriver.Firefox()
 
     username = 'huntanium_' #sys.argv[1]
-    password = 'okijuh123' #sys.argv[2]
+    password = '' #sys.argv[2]
 
     try:
         insta.instagram_login(driver, username, password)
