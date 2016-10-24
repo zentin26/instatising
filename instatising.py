@@ -9,11 +9,15 @@ import cStringIO
 import random
 import selenium
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 from bs4 import BeautifulSoup
 from pyvirtualdisplay import Display
 from base64 import *
+from stat_parser import Parser
 import insta
+driver = None
+text_parser = Parser()
+username = ''
+password = ''
 
 #####################################################
 #
@@ -37,14 +41,25 @@ def search(keywords):
 def get_posts(users=[], hashtags=[]):
     pass
 
+def get_meaning(text):
+    text = text_parser(text)
+
+    
+    return 
+
 def converse(post):
-    pass
+    # parse comment
+    comments = post.get_comments(driver, max_comments=10)
+    comments = filter(lambda x: x.get_attags(username), comments)
 
-
+    for comment in comments:
+        sentences = get_meaning(comment.text)
+        
+        
 def main():
     display = Display(visible=1)
     display.start()
-
+    
     driver = webdriver.Firefox()
 
     username = '' #sys.argv[1]
@@ -63,5 +78,10 @@ def main():
         driver.quit()
         display.stop()
 
+questions = [('', ''), # (question, answer)
+             ('', ''),
+             ('', '')]
+        
+        
 if __name__ == '__main__':
     main()
