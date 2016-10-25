@@ -8,13 +8,13 @@ import urllib
 import cStringIO
 import random
 import selenium
+import pdb
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from bs4 import BeautifulSoup
 from pyvirtualdisplay import Display
 from base64 import *
-import pdb
-
+from urlparse import urlparse
 
 def instagram_login(driver, username, password):
     driver.get('https://www.instagram.com/accounts/login/?force_classic_login')
@@ -45,14 +45,14 @@ def user_search(driver, query):
             driver.find_element_by_css_selector('div._o1o4h')
             break
         except:
-            if time.time()-start > 8:
-                return False
+            continue
 
-    items = map(lambda x: x.find_element_by_tag_name('a'), driver.find_elements_by_css_selector('div._o1o4h'))
-    items = map(lambda x: x.get_attribute('href'), items)
-    items = filter(lambda x: not x.startswith('/explore/tags/'), items)
+    users = driver.find_element_by_css_selector('div._o1o4h').find_elements_by_tag_name('a')
+    users = map(lambda x: urlparse(x.get_attribute('href')), users)
+    users = map(lambda x: x.path, users)
+    users = filter(lambda x: not x.startswith('/explore/tags/'), users)
     
-    return map(lambda x: instagramUser(items.replace('/', '')), items)
+    return map(lambda x: InstagramUser(x.replace('/', '')), users)
 
 def get_hashtag_posts(driver, hashtag, numposts=20):
     driver.get('https://www.instagram.com/explore/tags/' + hashtag)
