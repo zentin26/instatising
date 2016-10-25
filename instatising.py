@@ -78,10 +78,19 @@ def main():
         driver.quit()
         display.stop()
 
-questions = [('', ''), # (question, answer)
-             ('', ''),
-             ('', '')]
-        
+information = {'products': [{'price': '', 
+                             'name': '',
+                             'id': ''}],
+               
+               'contact':   {'phone_number': '',
+                             'location': '',
+                             'email': ''},
+               
+               'stores':    ['']}
+
+synonyms = [['you', 'store', '[name of bussiness]'],
+            ['site', 'website', 'url', 'weblink'], 
+            ['nearest', 'location', 'place', 'city', '[location]']]
         
 if __name__ == '__main__':
     main()
